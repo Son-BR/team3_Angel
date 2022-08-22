@@ -1,0 +1,218 @@
+# 패키지 설치 및 사용
+install.packages("describe")
+library(cowsay)  # python import
+say('안녕 난 주니온이야!')
+say('안녕', by='chicken')
+
+# 변수 이름 규칙
+# 마침표로도 시작 가능하고 알파벳 대문자와 소문자 구분
+. = 3
+print(.)
+
+# 데이터 저장
+x = 3
+x <- 3
+
+# cat은 python print, R의 print는 벡터로 출력
+print('print')
+cat('print', 'print2', sep='\n')
+
+# 현재 위치
+getwd()
+
+# 기본으로 설치되어 있는 데이터에 대한 정보 문서
+?iris
+
+# 데이터 plot 형태로 시각화
+plot(iris)
+
+# pandas DataFrame 형태로 열람
+View(iris)
+
+# pandas DataFrame의 description과 동일
+# 변수와 관측값 개수 알려면
+str(cars)
+
+# 최소, 1사분위, 중앙, 평균, 3사분위, 최대값 알려면
+# summary로 알 수 있는 건 결측치와 범주형 데이터 있을 경우 unique 값, 통계
+summary(cars$speed)
+
+# 컬럼별 통계 값 한 눈에 보려면
+psych::describe(survey)
+
+# 데이터의 header, tail 부분 확인
+head(iris, n=5)
+tail(iris, n=3)
+
+# 데이터 타입 확인
+# python의 type()
+class(cars$speed)
+
+# 특정 컬럼의 unique한 값만 levels 함수
+# summary로도 알 수 있음
+levels(iris$Species)
+
+# uique한 값의 데이터별 집계 table 함수
+table(iris$Species)
+
+barplot(table(iris$Species))
+
+# 평균, 분산, 표준편차 따로 구하려면
+mean(cars$speed)
+var(cars$speed)
+sd(cars$speed)
+
+# 막대그래프
+hist(mtcars$hp,
+     pch=19,  # marker 종류/모양
+     xlim=c(0, 400),
+     ylim=c(0, 12),
+     breaks=10,
+     col='tomato',  # tomato, steelblue, orange
+     main='꽃잎의 너비에 대한 히스토그램',
+     xlab='꽃잎의 너비',
+     ylab='빈도수')
+
+# 막대그래프2
+barplot(table(iris$Species),
+        col='tomato',
+        main='품종의 막대그래프',
+        xlab='품종',
+        ylab='개수')
+
+# 산점도
+plot(mean(cars$speed),
+     col='steelblue',
+     pch='+')
+
+!TRUE & TRUE | FALSE
+x <- 3
+(x > 3) && (x < 4)
+
+score <- 91
+
+if (score >= 90) {
+  grade <- "A"
+} else if (score >= 80) {
+  grade <- "B"
+} else {
+  grade <- "C"
+}
+grade
+
+s <- 0
+i <- 1
+while (i <= 10) {
+  s <- s + i
+  i <- i + 1
+}
+s
+
+s <- 0
+for (i in 1:10) {
+  s <- s + i
+}
+s
+
+# 함수 만들려면
+getorder = function(n){
+  order = 'Diet'
+  if (n %% 15 == 0){
+    order='피자나라치킨공주'
+  } else if (n %% 3 == 0){
+    order='피자'
+  } else if (n %% 5 == 0){
+    order='치킨'
+  }
+  return order
+}
+getorder(5)
+
+# length에 값을 주면 기본 False로 채워서 벡터 생성
+v = vector(length=2)
+v
+
+# vertor 만드는 다양한 방법
+v3 <- c(1, 2, 3, 5, 7)
+v3 <- seq(from=1, to=10, by=2)
+v3 <- rep(1:3, each=2, times=2)
+
+# which는 해당값의 인덱스를 찾아준다
+v <- c()
+for (i in 1:15) {
+  if (i %% 3 == 0 && i %% 5 == 0) {
+    v <- c(v, 'PZ')
+  } else if (i %% 3 == 0) {
+    v <- c(v, 'P')
+  } else if (i %% 5 == 0) {
+    v <- c(v, 'C')
+  } else {
+    v <- c(v, 'D')
+  }
+}
+v
+which(v == 'P')
+which(v == 'C')
+which(v == 'PC')
+
+# levels는 범주형 데이터의 unique한 값을 보여주는 것
+library(MASS)
+str(survey)
+
+# 어렵다
+blood <- c(1, 2, 3, 1, 4, 3, 2, 4)
+f.blood <- factor(blood, 
+                  levels = c(1, 2, 3, 4), 
+                  labels = c('A', 'B', 'AB', 'O'))
+f.blood
+levels(f.blood)
+table(f.blood)
+
+# 행렬 만들려면
+m = matrix(1:12, nrow=3, ncol=4)
+m
+
+# 행렬 방향 전환 Transformation
+m = t(m)
+
+# 행렬 shape 확인
+dim(m)
+
+# 행렬의 행 확인
+nrow(m)
+
+# 행렬의 열 확인
+ncol(m)
+
+# 행을 합치려면
+rbind(m[1, ], m[4, ])
+
+# 열을 합치려면
+cbind(m[, 1], m[, 3])
+
+
+# 결측값을 평균값으로 채워넣기
+x = c(45, NA, 87, 63, 55, NA, 72, 61, 59, 68)
+x[is.na(!x)] = mean(x, na.rm = T)
+x
+
+# is.na로는 안나오는데 데이터에 NA 있을때
+penguins[complete.cases(penguins), ]
+
+# 9. 팔머펭귄 탐색적 데이터 분석
+library(palmerpenguins)
+df = na.omit(penguins)
+df <- data.frame(df)
+
+# 날개 길이 오름차순, 체질량 내림차순 정렬
+ord <- order(df$flipper_length_mm, -df$body_mass_g)
+head(df[ord, 5:6], 10)
+
+boxplot(flipper_length_mm ~ species, data=df, col = 2:4)
+boxplot.stats(df$flipper_length_mm)
+
+adelie <- split(df, df$species)$Adelie
+adelie
+outlier <- boxplot.stats(adelie$flipper_length_mm)$out
+outlier
+df[df$flipper_length_mm %in% outlier,]

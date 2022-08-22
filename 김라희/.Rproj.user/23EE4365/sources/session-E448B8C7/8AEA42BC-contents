@@ -1,0 +1,45 @@
+# 이항 로지스틱 실습
+library(palmerpenguins)
+
+pg = penguins
+str(pg)
+
+# 결측치 제거, 년도 데이터 생략
+pg = pg[complete.cases(pg), -8]
+str(pg)
+dim(pg)
+
+pg$is.adelie = factor(ifelse(pg$species == 'Gentoo', 'yes', 'No'))
+barplot(table(pg$is.adelie))
+
+# species 데이터 삭제
+str(pg)
+pg = pg[, -1]
+str(pg)
+
+model = glm(is.adelie ~., data=pg, family=binomial(link='logit'))
+summary(model)
+
+model$fitted
+pg$pred = factor(ifelse(model$fitted.values > 0.5, 'yes', 'no'))
+table(pg$is.adelie, pg$pred)
+
+# iris 데이터 실습
+df = iris 
+df$Species = factor(df$Species == 'virginica', 'yes', 'no')
+model = glm(Species ~., data=df, family=binomal(link='logit'))
+summary(model)
+
+df$pred = factor(ifelse(model$fitted.values > 0.5, 'yes', 'no'))
+
+table(df$Species, df$pred)
+
+truepositive = table(df$Species, df$pred)[2, 2]
+truenegative = table(df$Species, df$pred)[1, 1]
+falsepositive = table(df$Species, df$pred)[2, 1]
+falsenegative = table(df$Species, df$pred)[1, 2]
+
+accuracy = (truepositive + truenegative) / (truepositive + truenegative + falsepositive + falsenegative)
+
+library(pROC)
+roc(species ~ model$fitted.values, data=df, plot=TRUE, main='ROC CURVE', col='tomato')
