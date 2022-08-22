@@ -4,10 +4,10 @@
 
 ## 구성원 및 역할
 
-김라희: 광양항
-김재열: 울산항
-손병립: 부산항
-이재상: 인천항
+### 김라희: 광양항
+### 김재열: 울산항
+### 손병립: 부산항
+### 이재상: 인천항
 
 데이터 출처: 해운항만물류정보시스템
 https://new.portmis.go.kr/portmis/websquare/websquare.jsp?w2xPath=/portmis/w2/main/intro.xml
