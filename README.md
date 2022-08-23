@@ -7,7 +7,7 @@
 ### 조장
  - 손병립: 부산항(https://sonbr.shinyapps.io/test/)
 ### 조원
- - 김라희: 광양항
+ - 김라희: 광양항(https://raputer.shinyapps.io/Gwangyang/)
  - 김재열: 울산항
  - 이재상: 인천항
 
