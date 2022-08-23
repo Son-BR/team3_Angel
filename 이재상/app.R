@@ -13,9 +13,9 @@ library(dplyr)
 library(tidyr)
 library(plyr)
 
-data <- read.csv('../MyShinyApp/data/result.csv', header=1)
+data <- read.csv('result.csv', header=1)
 
-port <- read.csv('../MyShinyApp/data/result.csv', header=1)
+port <- read.csv('result.csv', header=1)
 
 port <- rename(port,
                c('조회년도'='year',
@@ -109,113 +109,6 @@ server <- function(input, output) {
 }
 
 shinyApp(ui, server)
-# ----------------------------------------------------------------
-ui <- fluidPage(
-  tags$h1('연도별 수출입 현황'),
-  tags$h3('중분류 기준'),
-  tags$img(src="https://media0.giphy.com/media/1vrAR4gCDmLnPpBbMq/giphy.gif?cid=790b76117743789543fb5334664c78d350358f65fce24c76&rid=giphy.gif&ct=g"))
-
-server <- function(input,output){
-  
-}
-
-shinyApp(ui, server)
-# ----------------------------------------------------------------
-ui <- fluidPage(
-  tags$h1('연도별 수출입 현황'),
-  tags$h3('중분류 기준'),
-  tags$img(src="https://media1.giphy.com/media/8piqHXMAy3ueIcdPtb/giphy.gif?cid=790b7611c6b5e346f9c1168de81509e4e8cdea478ab5eb56&rid=giphy.gif&ct=g"))
-
-server <- function(input,output){
-  
-}
-
-shinyApp(ui, server)
-# ----------------------------------------------------------------
-
-
-
-data.a <- data[data$ADCategory=='입항',]
-data.a <- aggregate(data.a[,6], by=list(data.a$year,data.a$Measures), FUN=sum)
-colnames(data.a) <- c('year', 'Measures', 'total')
-data.a$total <- round(data.a$total/10000,0)
-
-ui <- fluidPage(
-  tags$h1('연도별 선박 현황 (입항 기준)'),
-  tags$h3('단위 : 만 톤 (ton)'),
-  plotOutput('plot'),
-  tableOutput('data')
-  
-)
-
-server <- function(input, output) {
-  
-  output$plot <- renderPlot({
-    newggslopegraph(data.a,year,total,Measures,
-                    Title=' ',
-                    SubTitle=' ',
-                    Caption='단위 (만 톤(ton))',
-                    XTextSize = 20,    # Size of the times
-                    YTextSize = 7,     # Size of the groups
-                    TitleTextSize = 20,
-                    SubTitleTextSize = 15,
-                    CaptionTextSize = 17,
-                    TitleJustify = "left",
-                    SubTitleJustify = "left",
-                    CaptionJustify = "right",
-                    DataTextSize = 5,
-                    LineColor = c('brown', 'blue', 'red', 'orange'),
-                    LineThickness = 2)
-    
-  })
-}
-
-shinyApp(ui, server)
-
-
-data.p <- data[data$ADCategory=='출항',]
-data.p <- aggregate(data.p[,6], by=list(data.p$year,data.p$Measures), FUN=sum)
-colnames(data.p) <- c('year', 'Measures', 'total')
-data.p$total <- round(data.p$total/10000,0)
-
-ui <- fluidPage(
-  tags$h1('연도별 선박 현황 (출항 기준)'),
-  tags$h3('단위 : 만 톤 (ton)'),
-  plotOutput('plot'),
-  tableOutput('data')
-  
-)
-
-server <- function(input, output) {
-
-    output$plot <- renderPlot({
-      newggslopegraph(data.p,year,total,Measures,
-                      Title=' ',
-                      SubTitle=' ',
-                      Caption='단위 (만 톤(ton))',
-                      XTextSize = 20,    # Size of the times
-                      YTextSize = 7,     # Size of the groups
-                      TitleTextSize = 20,
-                      SubTitleTextSize = 15,
-                      CaptionTextSize = 17,
-                      TitleJustify = "left",
-                      SubTitleJustify = "left",
-                      CaptionJustify = "right",
-                      DataTextSize = 5,
-                      LineColor = c('brown', 'blue', 'red', 'orange'),
-                      LineThickness = 2)
-    })
-
-}
-
-
-shinyApp(ui, server)
-
-
-
-
-
-
 #----------------------------------------------------------------------------------
 data.a <- data[data$ADCategory=='입항',]
 data.a <- aggregate(data.a[,6], by=list(data.a$year,data.a$Measures), FUN=sum)
@@ -283,3 +176,25 @@ server <- function(input, output) {
 
 shinyApp(ui, server)
 
+# ----------------------------------------------------------------
+ui <- fluidPage(
+  tags$h1('연도별 수출입 현황'),
+  tags$h3('중분류 기준'),
+  tags$img(src="https://media0.giphy.com/media/1vrAR4gCDmLnPpBbMq/giphy.gif?cid=790b76117743789543fb5334664c78d350358f65fce24c76&rid=giphy.gif&ct=g"))
+
+server <- function(input,output){
+  
+}
+
+shinyApp(ui, server)
+# ----------------------------------------------------------------
+ui <- fluidPage(
+  tags$h1('연도별 수출입 현황'),
+  tags$h3('중분류 기준'),
+  tags$img(src="https://media1.giphy.com/media/8piqHXMAy3ueIcdPtb/giphy.gif?cid=790b7611c6b5e346f9c1168de81509e4e8cdea478ab5eb56&rid=giphy.gif&ct=g"))
+
+server <- function(input,output){
+  
+}
+
+shinyApp(ui, server)
