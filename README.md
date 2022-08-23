@@ -8,7 +8,7 @@
  - 손병립: 부산항(https://sonbr.shinyapps.io/test/)
 ### 조원
  - 김라희: 광양항(https://raputer.shinyapps.io/Gwangyang/)
- - 김재열: 울산항
+ - 김재열: 울산항(https://jaeyeol.shinyapps.io/ulsan_visual/)
  - 이재상: 인천항
 
 데이터 출처: 해운항만물류정보시스템
